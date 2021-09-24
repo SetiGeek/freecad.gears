@@ -813,6 +813,8 @@ class TimingGear(BaseGear):
         obj.addProperty(
             "App::PropertyLength", "height", "gear_parameter", "height")
         obj.addProperty(
+            "App::PropertyLength", "backlash", "gear_parameter", "backlash")
+        obj.addProperty(
             "App::PropertyLength", "pitch", "computed", "pitch off gear", 1)
         obj.addProperty(
             "App::PropertyLength", "h", "computed", "radial height of teeth", 1)
@@ -830,6 +832,7 @@ class TimingGear(BaseGear):
         obj.teeth = 15
         obj.type = ['gt2', 'gt3', 'gt5']
         obj.height = '5. mm'
+        obj.backlash = '0.0 mm'
 
         self.obj = obj
         obj.Proxy = self
@@ -843,7 +846,7 @@ class TimingGear(BaseGear):
         gt_data = self.data[tp]
         pitch = fp.pitch = gt_data["pitch"]
         h = fp.h = gt_data["h"]
-        u = fp.u = gt_data["u"]
+        u = fp.u = gt_data["u"] + fp.backlash.Value
         r_12 = fp.r0 = gt_data["r0"]
         r_23 = fp.r1 = gt_data["r1"]
         r_34 = fp.rs = gt_data["rs"]
